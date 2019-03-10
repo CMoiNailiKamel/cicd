@@ -1,3 +1,13 @@
+
+podTemplate(cloud: 'k8sClusterLabel' ,label: 'docker',
+  containers: [
+    containerTemplate(name: 'docker', image: 'docker:git', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'nodejs', image: 'node:6-onbuild', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'kubectl', image: 'amaceog/kubectl', ttyEnabled: true, command: 'cat')
+  ],
+  volumes: [
+    hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
+  ])
 node {
     def app
 
